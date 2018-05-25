@@ -6,10 +6,10 @@ import "./App.css";
 import { Navbar, NavItem, Nav, Grid, Row, Col } from "react-bootstrap";
 
 const PLACES = [
-  { name: "Palo Alto", zip: "94303" },
-  { name: "San Jose", zip: "94088" },
-  { name: "Santa Cruz", zip: "95062" },
-  { name: "Honolulu", zip: "96803" }
+  { name: "Backend Developers", zip: "94303" },
+  { name: "Frontend Developers", zip: "94088" },
+  { name: "QA & automation", zip: "95062" },
+  { name: "UI/UX", zip: "96803" }
 ];
 
 class Vacation extends Component {
@@ -34,15 +34,34 @@ class Vacation extends Component {
     const weather = vacationData.weather[0];
     const iconUrl = "http://openweathermap.org/img/w/" + weather.icon + ".png";
     return (
-      <div>
+      <div id = "passPrompt">
         <h1>
-          {weather.main} in {vacationData.name}
-          <img src={iconUrl} />
+          Введите пароль для проекта
         </h1>
-        <p>Current: {vacationData.main.temp}°</p>
+        <input type="password" id = "projPass" />
+        <button type="submit" onClick={() => {
+            if (document.getElementById("passValMsg")) document.getElementById("passValMsg").remove();
+            var entPass = document.getElementById("projPass");
+            console.log('Entered '+ entPass.value);
+            var validRes = document.createElement('div');
+            validRes.setAttribute("id", "passValMsg");
+             if (entPass.value == this.props.zip) {
+                 // validRes.className = "result-success";
+                 // validRes.innerHTML = "<strong>Да!</strong>";
+                 // document.getElementById("passPrompt").appendChild(validRes);
+                 document.getElementById("passPrompt").remove();
+             }
+             else {
+                 validRes.className = "result-fail";
+                 validRes.innerHTML = "<strong>Неверный пароль</strong>";
+                 document.getElementById("passPrompt").appendChild(validRes);
+             }
+            }}>Submit</button>
+
+       {/* <p>Current: {vacationData.main.temp}°</p>
         <p>High: {vacationData.main.temp_max}°</p>
         <p>Low: {vacationData.main.temp_min}°</p>
-        <p>Wind Speed: {vacationData.wind.speed} mi/hr</p>
+        <p>Wind Speed: {vacationData.wind.speed} mi/hr</p>*/}
       </div>
     );
   }
@@ -62,15 +81,14 @@ class App extends Component {
         <Navbar>
           <Navbar.Header>
             <Navbar.Brand>
-              React Simple Weather App
+              VAC - Vacation Plan
             </Navbar.Brand>
-            <a href="https://github.com/ericvicenti/intro-to-react">Learn to build me</a>
           </Navbar.Header>
         </Navbar>
         <Grid>
           <Row>
             <Col md={4} sm={4}>
-              <h3>Select a city</h3>
+              <h3>Выберите команду</h3>
               <Nav
                 bsStyle="pills"
                 stacked
