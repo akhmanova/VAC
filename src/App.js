@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "bootswatch/journal/bootstrap.css";
 // import "bootstrap/dist/css/bootstrap.css";
+import { render } from 'react-dom'
+import Home from './js/components/Home'
 import "./App.css";
 
 import { Navbar, NavItem, Nav, Grid, Row, Col } from "react-bootstrap";
@@ -46,6 +48,7 @@ class Vacation extends Component {
             var validRes = document.createElement('div');
             validRes.setAttribute("id", "passValMsg");
              if (entPass.value == this.props.zip) {
+                 render(<Home />, document.getElementById('root'));
                  // validRes.className = "result-success";
                  // validRes.innerHTML = "<strong>Да!</strong>";
                  // document.getElementById("passPrompt").appendChild(validRes);
