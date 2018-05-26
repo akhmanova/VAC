@@ -23,7 +23,7 @@ class Vacation extends Component {
   }
   componentDidMount() {
     const zip = this.props.zip;
-    const URL = "http://api.openweathermap.org/data/2.5/weather?q=" +
+    const URL = "//api.openweathermap.org/data/2.5/weather?q=" +
       zip +
       "&appid=b1b35bba8b434a28a0be2a3e1071ae5b&units=imperial";
     fetch(URL).then(res => res.json()).then(json => {
@@ -34,7 +34,7 @@ class Vacation extends Component {
     const vacationData = this.state.vacationData;
     if (!vacationData) return <div>Loading</div>;
     const weather = vacationData.weather[0];
-    const iconUrl = "http://openweathermap.org/img/w/" + weather.icon + ".png";
+    const iconUrl = "//openweathermap.org/img/w/" + weather.icon + ".png";
     return (
       <div id = "passPrompt">
         <h1>
