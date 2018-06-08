@@ -46,6 +46,18 @@ class Vacation extends Component {
             var entPass = document.getElementById("projPass");
             console.log('Entered '+ entPass.value);
             var validRes = document.createElement('div');
+            var xhr = new XMLHttpRequest();
+            var url = "url";
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var json = JSON.parse(xhr.responseText);
+                    console.log(json.email + ", " + json.password);
+                }
+            };
+            var data = JSON.stringify({"password": entPass.value});
+            xhr.send(data);
             validRes.setAttribute("id", "passValMsg");
              if (entPass.value == this.props.zip) {
                  render(<Home />, document.getElementById('root'));
@@ -53,6 +65,7 @@ class Vacation extends Component {
                  // validRes.innerHTML = "<strong>Да!</strong>";
                  // document.getElementById("passPrompt").appendChild(validRes);
                  document.getElementById("passPrompt").remove();
+
              }
              else {
                  validRes.className = "result-fail";
@@ -76,6 +89,7 @@ class App extends Component {
     this.state = {
       activePlace: 0
     };
+    console.log(this.state.activePlace + "constructor");
   }
   render() {
     const activePlace = this.state.activePlace;
@@ -96,9 +110,11 @@ class App extends Component {
                 bsStyle="pills"
                 stacked
                 activeKey={activePlace}
-                onSelect={index => {
-                  this.setState({ activePlace: index });
-                }}
+                onSelect={index => {this.setState({ activePlace: index });
+                   console.log(this.state.activePlace + "inside index =>");
+
+                }
+                }
               >
                 {PLACES.map((place, index) => (
                   <NavItem key={index} eventKey={index}>{place.name}</NavItem>
