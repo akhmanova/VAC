@@ -6,7 +6,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^3.3.7",
     "bootswatch": "^3.3.7",
-    "moment": "^2.22.1",
+    "moment": "^2.29.4",
     "react": "^15.5.4",
     "react-big-calendar": "^0.19.1",
     "react-bootstrap": "^0.30.8",
